@@ -66,15 +66,6 @@ class Test(unittest.TestCase):
         self.assertTrue(regex.compare('col.*r', 'collar', 0, 0, True))
         self.assertFalse(regex.compare('col.*r$', 'colors', 0, 0, True))
 
-    def test_level_6(self):
-        # tests for the strings of the different length with special cases
-        self.assertTrue(regex.compare('\.$', 'end.', 0, 0, True))
-        self.assertTrue(regex.compare('3\+3', '3+3=6', 0, 0, True))
-        self.assertTrue(regex.compare('\?', 'Is this working?', 0, 0, True))
-        self.assertTrue(regex.compare('\\\\', '\\', 0, 0, True))
-        self.assertFalse(regex.compare('colou\?r', 'color', 0, 0, True))
-        self.assertFalse(regex.compare('colou\?r', 'colour', 0, 0, True))
-
 
 if __name__ == '__main__':
     unittest.main()

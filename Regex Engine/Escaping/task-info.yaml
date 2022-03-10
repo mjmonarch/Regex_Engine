@@ -127,6 +127,155 @@ files:
     if __name__ == '__main__':
         RegexTest('regex.regex').run_tests()
   learner_created: false
+- name: regex/test_regex_5.py
+  visible: true
+  text: |
+    import unittest
+    import regex
+
+
+    class Test(unittest.TestCase):
+
+        def test_level_1(self):
+            # tests for the match of 1 symbol
+            self.assertTrue(regex.match('a', 'a'))
+            self.assertTrue(regex.match('.', 'a'))
+            self.assertTrue(regex.match(' ', ' '))
+            self.assertFalse(regex.match('A', 'a'))
+            self.assertFalse(regex.match('-', '_'))
+
+        def test_level_2(self):
+            # tests for the match of 1 symbol
+            self.assertTrue(regex.compare('apple', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('.pple', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('appl.', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('.....', 'apple', 0, 0, True))
+            self.assertFalse(regex.compare('peach', 'apple', 0, 0, True))
+
+        def test_level_2(self):
+            # tests for the strings of the same length
+            self.assertTrue(regex.compare('apple', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('.pple', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('appl.', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('.....', 'apple', 0, 0, True))
+            self.assertFalse(regex.compare('peach', 'apple', 0, 0, True))
+
+        def test_level_3(self):
+            # tests for the strings of the different length without special cases
+            self.assertTrue(regex.compare('apple', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('ap', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('le', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('a', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('.', 'apple', 0, 0, True))
+            self.assertFalse(regex.compare('apwle', 'apple', 0, 0, True))
+            self.assertFalse(regex.compare('peach', 'apple', 0, 0, True))
+
+        def test_level_4(self):
+            # tests for the strings of the different length with special cases
+            self.assertTrue(regex.compare('^app', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('le$', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('^a', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('.$', 'apple', 0, 0, True))
+            self.assertTrue(regex.compare('apple$', 'tasty apple', 0, 0, True))
+            self.assertTrue(regex.compare('^apple', 'apple pie', 0, 0, True))
+            self.assertTrue(regex.compare('^apple$', 'apple', 0, 0, True))
+            self.assertFalse(regex.compare('^apple$', 'tasty apple', 0, 0, True))
+            self.assertFalse(regex.compare('^apple$', 'apple pie', 0, 0, True))
+            self.assertFalse(regex.compare('app$', 'apple', 0, 0, True))
+            self.assertFalse(regex.compare('^le', 'apple', 0, 0, True))
+
+        def test_level_5(self):
+            # tests for the strings of the different length with special cases
+            self.assertTrue(regex.compare('colou?r', 'color', 0, 0, True))
+            self.assertTrue(regex.compare('colou?r', 'colour', 0, 0, True))
+            self.assertFalse(regex.compare('colou?r', 'colouur', 0, 0, True))
+            self.assertTrue(regex.compare('colou*r', 'color', 0, 0, True))
+            self.assertTrue(regex.compare('colou*r', 'colour', 0, 0, True))
+            self.assertTrue(regex.compare('colou*r', 'colouur', 0, 0, True))
+            self.assertTrue(regex.compare('col.*r', 'color', 0, 0, True))
+            self.assertTrue(regex.compare('col.*r', 'colour', 0, 0, True))
+            self.assertTrue(regex.compare('col.*r', 'colr', 0, 0, True))
+            self.assertTrue(regex.compare('col.*r', 'collar', 0, 0, True))
+            self.assertFalse(regex.compare('col.*r$', 'colors', 0, 0, True))
+
+
+    if __name__ == '__main__':
+        unittest.main()
+  learner_created: true
+- name: regex/__init__.py
+  visible: true
+  learner_created: true
+- name: regex/test_regex_4.py
+  visible: true
+  text: |
+    import unittest
+    import regex
+
+
+    class Test(unittest.TestCase):
+
+        def test_level_1(self):
+            # tests for the match of 1 symbol
+            self.assertTrue(regex.match('a', 'a'))
+            self.assertTrue(regex.match('.', 'a'))
+            self.assertTrue(regex.match(' ', ' '))
+            self.assertFalse(regex.match('A', 'a'))
+            self.assertFalse(regex.match('-', '_'))
+
+        def test_level_2(self):
+            # tests for the match of 1 symbol
+            self.assertTrue(regex.compare_same_length('apple', 'apple'))
+            self.assertTrue(regex.compare_same_length('.pple', 'apple'))
+            self.assertTrue(regex.compare_same_length('appl.', 'apple'))
+            self.assertTrue(regex.compare_same_length('.....', 'apple'))
+            self.assertFalse(regex.compare_same_length('peach', 'apple'))
+
+        def test_level_2(self):
+            # tests for the strings of the same length
+            self.assertTrue(regex.compare_same_length('apple', 'apple'))
+            self.assertTrue(regex.compare_same_length('.pple', 'apple'))
+            self.assertTrue(regex.compare_same_length('appl.', 'apple'))
+            self.assertTrue(regex.compare_same_length('.....', 'apple'))
+            self.assertFalse(regex.compare_same_length('peach', 'apple'))
+
+        def test_level_3(self):
+            # tests for the strings of the different length without special cases
+            self.assertTrue(regex.compare_simple('apple', 'apple'))
+            self.assertTrue(regex.compare_simple('ap', 'apple'))
+            self.assertTrue(regex.compare_simple('le', 'apple'))
+            self.assertTrue(regex.compare_simple('a', 'apple'))
+            self.assertTrue(regex.compare_simple('.', 'apple'))
+            self.assertFalse(regex.compare_simple('apwle', 'apple'))
+            self.assertFalse(regex.compare_simple('peach', 'apple'))
+
+        def test_level_4(self):
+            # tests for the strings of the different length with special cases
+            self.assertTrue(regex.compare_complex('^app', 'apple'))
+            self.assertTrue(regex.compare_complex('le$', 'apple'))
+            self.assertTrue(regex.compare_complex('^a', 'apple'))
+            self.assertTrue(regex.compare_complex('.$', 'apple'))
+            self.assertTrue(regex.compare_complex('apple$', 'tasty apple'))
+            self.assertTrue(regex.compare_complex('^apple', 'apple pie'))
+            self.assertTrue(regex.compare_complex('^apple$', 'apple'))
+            self.assertFalse(regex.compare_complex('^apple$', 'tasty apple'))
+            self.assertFalse(regex.compare_complex('^apple$', 'apple pie'))
+            self.assertFalse(regex.compare_complex('app$', 'apple'))
+            self.assertFalse(regex.compare_complex('^le', 'apple'))
+
+
+    if __name__ == '__main__':
+        unittest.main()
+  learner_created: true
+- name: __init__.py
+  visible: true
+  learner_created: true
+- name: regex/test_regex_6.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/114/stages/624/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Thu, 10 Mar 2022 11:36:59 UTC
 record: -1
